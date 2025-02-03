@@ -39,7 +39,7 @@ float Fixed::toFloat(void) const
 
 int Fixed::toInt(void) const
 {
-	return (this->getRawBits() >> this->bitsFraction);
+	return (this->getRawBits() >> bitsFraction);
 }
 
 int Fixed::getRawBits(void) const
@@ -51,6 +51,12 @@ void Fixed::setRawBits(int const raw)
 {
 	this->rawBits = raw;
 };
+
+
+int Fixed::getBitsFraction()
+{
+    return bitsFraction;
+}
 
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed)
 {
@@ -68,7 +74,7 @@ Fixed operator+(const Fixed &a, const Fixed &b)
 Fixed operator*(const Fixed &a, const Fixed &b)
 {
     Fixed result;
-    result.setRawBits((a.getRawBits() * b.getRawBits()) >> Fixed::bitsFraction);
+    result.setRawBits((a.getRawBits() * b.getRawBits()) >> Fixed::getBitsFraction());
     return result;
 }
 
@@ -85,7 +91,7 @@ Fixed operator/(const Fixed &a, const Fixed &b)
         throw std::runtime_error("Division by zero");
 
     Fixed result;
-    result.setRawBits((a.getRawBits() << Fixed::bitsFraction) / b.getRawBits());
+    result.setRawBits((a.getRawBits() << Fixed::getBitsFraction()) / b.getRawBits());
     return result;
 }
 
@@ -117,32 +123,32 @@ Fixed Fixed::operator--(int)
 
 bool operator>(const Fixed& lhs, const Fixed& rhs)
 {
-    return lhs.rawBits > rhs.rawBits;
+    return lhs.getRawBits() > rhs.getRawBits();
 }
 
 bool operator<(const Fixed& lhs, const Fixed& rhs)
 {
-    return lhs.rawBits < rhs.rawBits;
+    return lhs.getRawBits() < rhs.getRawBits();
 }
 
 bool operator>=(const Fixed& lhs, const Fixed& rhs)
 {
-    return lhs.rawBits >= rhs.rawBits;
+    return lhs.getRawBits() >= rhs.getRawBits();
 }
 
 bool operator<=(const Fixed& lhs, const Fixed& rhs)
 {
-    return lhs.rawBits <= rhs.rawBits;
+    return lhs.getRawBits() <= rhs.getRawBits();
 }
 
 bool operator==(const Fixed& lhs, const Fixed& rhs)
 {
-    return lhs.rawBits == rhs.rawBits;
+    return lhs.getRawBits() == rhs.getRawBits();
 }
 
 bool operator!=(const Fixed& lhs, const Fixed& rhs)
 {
-    return lhs.rawBits != rhs.rawBits;
+    return lhs.getRawBits() != rhs.getRawBits();
 }
 
 Fixed& Fixed::min(Fixed &a, Fixed &b)

@@ -21,32 +21,32 @@ public:
 	void setRawBits(int const raw);
 	int getRawBits(void) const;
 
+	static int getBitsFraction();
+
 	static Fixed &min(Fixed &a, Fixed &b);
 	static const Fixed &min(const Fixed &a, const Fixed &b);
 	static Fixed &max(Fixed &a, Fixed &b);
 	static const Fixed &max(const Fixed &a, const Fixed &b);
 
-	// io operator
-	friend std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
-	// Assignment Operator
 	Fixed &operator=(const Fixed&);
-    // Arithmetic Operators
-    friend Fixed operator+(const Fixed& a, const Fixed& b);
-    friend Fixed operator-(const Fixed& a, const Fixed& b);
-    friend Fixed operator*(const Fixed& a, const Fixed& b);
-    friend Fixed operator/(const Fixed& a, const Fixed& b);
-    // Increment and Decrement Operators
-    Fixed& operator++();              // Pre-increment
-    Fixed operator++(int);            // Post-increment
-    Fixed& operator--();              // Pre-decrement
-    Fixed operator--(int);            // Post-decrement
-    // Comparison Operators
-    friend bool operator>(const Fixed& lhs, const Fixed& rhs);
-    friend bool operator<(const Fixed& lhs, const Fixed& rhs);
-    friend bool operator>=(const Fixed& lhs, const Fixed& rhs);
-    friend bool operator<=(const Fixed& lhs, const Fixed& rhs);
-    friend bool operator==(const Fixed& lhs, const Fixed& rhs);
-    friend bool operator!=(const Fixed& lhs, const Fixed& rhs);
+    Fixed& operator++();
+    Fixed operator++(int);
+    Fixed& operator--();
+    Fixed operator--(int);
 };
+// io operator
+std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
+// Arithmetic Operators
+Fixed operator+(const Fixed& a, const Fixed& b);
+Fixed operator-(const Fixed& a, const Fixed& b);
+Fixed operator*(const Fixed& a, const Fixed& b);
+Fixed operator/(const Fixed& a, const Fixed& b);
+// Comparison Operators
+bool operator>(const Fixed& lhs, const Fixed& rhs);
+bool operator<(const Fixed& lhs, const Fixed& rhs);
+bool operator>=(const Fixed& lhs, const Fixed& rhs);
+bool operator<=(const Fixed& lhs, const Fixed& rhs);
+bool operator==(const Fixed& lhs, const Fixed& rhs);
+bool operator!=(const Fixed& lhs, const Fixed& rhs);
 
 #endif
